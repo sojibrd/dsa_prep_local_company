@@ -47,7 +47,11 @@ export type Pattern = {
   topicName: string;
   clue: string;
   demo: string;
+  /** `**Demo: নাম** — [LC n](url)` — plan-এ demo-ও প্রবলেম হিসেবে আসতে পারে */
+  demoProblem: Problem | null;
   problems: Problem[];
+  /** তালিকার শেষে অন্য প্যাটার্নের দিকে ইশারা — `Sliding Window Maximum → দেখুন **4.4**` */
+  seeAlso: string[];
 };
 
 export type ProblemRef = Pick<Problem, "key" | "lc" | "name" | "url" | "source"> & {
@@ -59,12 +63,28 @@ export type ProblemRef = Pick<Problem, "key" | "lc" | "name" | "url" | "source">
 const H3_RE = /^###\s+(\d+\.\d+)\s+(.+)$/;
 const CLUE_RE = /^\*\*(?:চিনবেন কীভাবে|How to spot it):\*\*\s*(.*)$/;
 const DEMO_RE = /^\*\*Demo\b/;
+const DEMO_PROBLEM_RE = /^\*\*Demo:\s*(.+?)\*\*\s+—\s+\[([^\]]+)\]\(([^)]+)\)\s*(.*)$/;
 const LIST_RE = /^\*\*(?:প্রবলেম লিস্ট|Problems):\*\*\s*$/;
 const PROBLEM_RE = /^-\s+\[[ xX]\]\s+\*\*(.+?)\*\*\s+—\s+\[([^\]]+)\]\(([^)]+)\)(?:\s+—\s+(🔥 Must-do|⚪ Bonus))?\s*(.*)$/;
 const NOTE_LINE_RE = /^→\s*(?:আমার সমাধান|যে সমস্যা হয়েছিল|My solution|Where I got stuck):/;
 
 function problemKey(lc: number | null, name: string): string {
   return lc !== null ? `lc${lc}` : `gfg-${slugify(name)}`;
+}
+
+function toProblem(name: string, source: string, url: string, tag: string | undefined, note: string): Problem {
+  const lcMatch = /^LC\s+(\d+)$/.exec(source.trim());
+  const lc = lcMatch ? Number(lcMatch[1]) : null;
+  return {
+    key: problemKey(lc, name),
+    lc,
+    name: name.trim(),
+    url,
+    source: source.trim(),
+    mustDo: tag === "🔥 Must-do",
+    note: note.trim(),
+    body: "",
+  };
 }
 
 function parseTopics(): Map<number, string> {
@@ -82,8 +102,10 @@ function parsePattern(file: string, slug: string, topics: Map<number, string>): 
   let id = "";
   let name = "";
   let clue = "";
+  let demoProblem: Problem | null = null;
   const demo: string[] = [];
   const problems: Problem[] = [];
+  const seeAlso: string[] = [];
   let section: "head" | "demo" | "list" = "head";
   let current: { problem: Problem; body: string[] } | null = null;
 
@@ -120,6 +142,8 @@ function parsePattern(file: string, slug: string, topics: Map<number, string>): 
     }
 
     if (section === "demo") {
+      const demoMatch = demoProblem ? null : DEMO_PROBLEM_RE.exec(line);
+      if (demoMatch) demoProblem = toProblem(demoMatch[1], demoMatch[2], demoMatch[3], undefined, demoMatch[4]);
       demo.push(line);
       continue;
     }
@@ -128,30 +152,26 @@ function parsePattern(file: string, slug: string, topics: Map<number, string>): 
     if (problemMatch) {
       flush();
       const [, problemName, source, url, tag, note] = problemMatch;
-      const lcMatch = /^LC\s+(\d+)$/.exec(source.trim());
-      const lc = lcMatch ? Number(lcMatch[1]) : null;
-      current = {
-        problem: {
-          key: problemKey(lc, problemName),
-          lc,
-          name: problemName.trim(),
-          url,
-          source: source.trim(),
-          mustDo: tag === "🔥 Must-do",
-          note: note.trim(),
-          body: "",
-        },
-        body: [],
-      };
+      current = { problem: toProblem(problemName, source, url, tag, note), body: [] };
       continue;
     }
 
-    if (current) {
-      const text = line.trim();
-      if (!text || NOTE_LINE_RE.test(text)) continue;
+    const text = line.trim();
+    if (!text) continue;
+    /* তালিকার পরে `---` — তার নিচে পরিশিষ্ট বা রুটিন, প্যাটার্নের অংশ নয় */
+    if (text === "---") break;
+
+    /* প্রবলেমের Statement আর উদাহরণ indent করা থাকে; বাকি সব লাইন প্রবলেম শেষ করে */
+    if (current && /^\s/.test(line)) {
+      if (NOTE_LINE_RE.test(text)) continue;
       /* markdown-এ প্রতিটা লাইন আলাদা থাকুক — Statement আর উদাহরণ গুলিয়ে না যায় */
       current.body.push(`${text.replace(/^→\s*/, "")}  `);
+      continue;
     }
+
+    flush();
+    /* `- _Sliding Window Maximum → দেখুন **4.4**_` — অন্য প্যাটার্নের দিকে ইশারা */
+    if (/^-\s+/.test(text)) seeAlso.push(text.replace(/^-\s+/, "").replace(/\\\*/g, "*"));
   }
   flush();
 
@@ -166,7 +186,9 @@ function parsePattern(file: string, slug: string, topics: Map<number, string>): 
     topicName: topics.get(topicNum) ?? `টপিক ${topicNum}`,
     clue,
     demo: demo.join("\n").trim(),
+    demoProblem,
     problems,
+    seeAlso,
   };
 }
 
@@ -206,7 +228,9 @@ export function getTopics(): { num: number; name: string; patterns: Pattern[] }[
  */
 export function findProblem(key: string): ProblemRef | undefined {
   for (const pattern of getPatterns()) {
-    const problem = pattern.problems.find((item) => item.key === key);
+    const problem = [...pattern.problems, ...(pattern.demoProblem ? [pattern.demoProblem] : [])].find(
+      (item) => item.key === key,
+    );
     if (problem) {
       return {
         key: problem.key,

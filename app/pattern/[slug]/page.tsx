@@ -74,6 +74,27 @@ export default async function PatternPage({ params }: { params: Promise<Params> 
         <Markdown className="measure mt-4">{pattern.demo}</Markdown>
       </details>
 
+      {/* demo-ও plan-এর প্রবলেম হতে পারে — তখন নোট আর দিনের লিংক এখানে, ভাঁজের বাইরে */}
+      {pattern.demoProblem && problemDays[pattern.demoProblem.key] && (
+        <section className="surface-raised flex flex-col gap-2 p-3 sm:p-4">
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <span className="task-text text-sm font-semibold">Demo · {pattern.demoProblem.name}</span>
+            <span className="flex flex-wrap gap-1.5">
+              {problemDays[pattern.demoProblem.key].map((day) => (
+                <Link key={day.code} href={`/day/${day.code}/`} className="chip chip--accent">
+                  plan · দিন {day.label}
+                </Link>
+              ))}
+              <a href={pattern.demoProblem.url} target="_blank" rel="noreferrer" className="chip">
+                {pattern.demoProblem.source}
+                <ArrowUpRight size={10} />
+              </a>
+            </span>
+          </div>
+          <ProblemNotes problemKey={pattern.demoProblem.key} />
+        </section>
+      )}
+
       <section className="surface-panel flex flex-col gap-4 p-4 sm:p-6">
         <h2 className="t-title text-base sm:text-lg">প্রবলেম</h2>
         <ul className="flex flex-col gap-3">
@@ -107,6 +128,19 @@ export default async function PatternPage({ params }: { params: Promise<Params> 
             );
           })}
         </ul>
+        {pattern.problems.length === 0 && (
+          <div className="surface-well t-caption p-4 text-center">এই প্যাটার্নে আলাদা প্রবলেম নেই — demo-ই মূল প্রবলেম।</div>
+        )}
+        {pattern.seeAlso.length > 0 && (
+          <div className="seam-t flex flex-col gap-1 pt-3">
+            <span className="t-label">আরও দেখুন</span>
+            {pattern.seeAlso.map((line) => (
+              <Markdown key={line} inline className="t-caption">
+                {line}
+              </Markdown>
+            ))}
+          </div>
+        )}
       </section>
 
       <Pager
