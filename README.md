@@ -1,10 +1,10 @@
-# local_company_dsa_prep
+# dsa_prep_local_company
 
 বাংলাদেশি কোম্পানির DSA রাউন্ডের প্রস্তুতি: `dsa_prep` workbook-এর টপিক ১–৫ থেকে ৩০টা প্রবলেম, ৪০ দিনে। দিনে একটা করে, ঝালাইসহ, শেখার বিজ্ঞান মেনে। ৩০টা শেষ হলে থামা।
 
-এটা তিনটা পথের প্রথমটা: লোকাল → [রিমোট](https://sojibrd.github.io/remote_company_dsa_prep/) → [গ্লোবাল](https://sojibrd.github.io/global_company_dsa_prep/)। পথগুলো একটার ভেতরে আরেকটা। `switch_local_company_in_6_month`-এর দিন ০০৮–০৪৭-এ ৩০′ DSA-র যে ঘর আছে, এই সাইট সেই ঘরের কাজ।
+এটা তিনটা পথের প্রথমটা: লোকাল → [রিমোট](https://sojibrd.github.io/dsa_prep_remote_company/) → [গ্লোবাল](https://sojibrd.github.io/dsa_prep_global_company/)। পথগুলো একটার ভেতরে আরেকটা। `switch_local_company_in_6_month`-এর দিন ০০৮–০৪৭-এ ৩০′ DSA-র যে ঘর আছে, এই সাইট সেই ঘরের কাজ।
 
-**লাইভ:** https://sojibrd.github.io/local_company_dsa_prep/
+**লাইভ:** https://sojibrd.github.io/dsa_prep_local_company/
 
 ## Functional Requirement
 

@@ -4,7 +4,7 @@
 
 ### আমরা কী তৈরি করছি
 
-`dsa_prep` (লোকাল ফোল্ডার + GitHub repo + লাইভ সাইট) মুছে তার জায়গায় তিনটা স্বতন্ত্র প্রজেক্ট — `local_company_dsa_prep`, `remote_company_dsa_prep`, `global_company_dsa_prep` — প্রতিটা নিজের ফোল্ডার, নিজের public repo, নিজের GitHub Pages সাইট। প্রতিটা `switch_local_company_in_6_month`-এর **পুরো গড়ন** মানে: `docs/`-এ দিনভিত্তিক plan, "আজ"-এর পাতা, rail + মোবাইলে drawer, `/day/`, `/block/`, `/review/` (🔁 ১/৩/৭/২১), `/rules/`, 🧠 নীতির chip, ⚑ মাইলফলক, Theme contract, dark-only। কনটেন্ট `brainstorming/dsa-prep-how-many-paths.md`-এর তিনটা পথ, আর প্রতিটা কাজ `learning_to_learn`-এর নীতি (principle, lies, pillars, science, techniques) থেকে। পাশাপাশি `switch_local_company_in_6_month` থেকে প্রবলেমের তালিকা সরে গিয়ে শুধু ৩০′-এর DSA ঘর থাকবে।
+`dsa_prep` (লোকাল ফোল্ডার + GitHub repo + লাইভ সাইট) মুছে তার জায়গায় তিনটা স্বতন্ত্র প্রজেক্ট — `dsa_prep_local_company`, `dsa_prep_remote_company`, `dsa_prep_global_company` — প্রতিটা নিজের ফোল্ডার, নিজের public repo, নিজের GitHub Pages সাইট। প্রতিটা `switch_local_company_in_6_month`-এর **পুরো গড়ন** মানে: `docs/`-এ দিনভিত্তিক plan, "আজ"-এর পাতা, rail + মোবাইলে drawer, `/day/`, `/block/`, `/review/` (🔁 ১/৩/৭/২১), `/rules/`, 🧠 নীতির chip, ⚑ মাইলফলক, Theme contract, dark-only। কনটেন্ট `brainstorming/dsa-prep-how-many-paths.md`-এর তিনটা পথ, আর প্রতিটা কাজ `learning_to_learn`-এর নীতি (principle, lies, pillars, science, techniques) থেকে। পাশাপাশি `switch_local_company_in_6_month` থেকে প্রবলেমের তালিকা সরে গিয়ে শুধু ৩০′-এর DSA ঘর থাকবে।
 
 ### যে পরিভাষাগুলোতে আমরা সম্মত হয়েছি
 
@@ -20,7 +20,7 @@
 ### নেওয়া সিদ্ধান্তসমূহ
 
 * **১ · তারিখের উৎস:** ফাইলে শুধু দিনের নম্বর (`### দিন ০০৭ · শিরোনাম`), তারিখ নয়। শুরুর তারিখ ইউজার সাইটে একবার বসান (`localStorage`); "আজ" = শুরু + দিনের নম্বর। শুরুর তারিখ না থাকলে হোমে শুধু "কবে শুরু করবেন?"। লোকালের প্রস্তাবিত শুরু **২০২৬-০৯-২১** (= `switch_local_company_in_6_month`-এর দিন ০০৮)। *কারণ:* রিমোট/গ্লোবালের তারিখ কোথাও লেখা নেই, বানানো যাবে না; তিন প্রজেক্টে এক নিয়ম। `switch_local_company_in_6_month`-এর "দিন গোনা কোডে নয়" নিয়ম এখানে জেনেবুঝে ভাঙা।
-* **২ · লোকালের ৩০টা প্রবলেমের মালিক:** শুধু `local_company_dsa_prep`। `switch_local_company_in_6_month`-এ প্রবলেমের নাম ও 🔁 সরে `- [ ] ৩০′ DSA — আজকের প্রবলেম local_company_dsa_prep-এ` হবে; `00-rules.md`-এর "DSA-র বসা" লোকাল প্রজেক্টের নিয়মে সরে এক লাইনের লিংক। *কারণ:* টিক ও ঝালাই এক জায়গায়। DSA শুরু ০৯-২১, তাই হারানোর মতো টিক নেই।
+* **২ · লোকালের ৩০টা প্রবলেমের মালিক:** শুধু `dsa_prep_local_company`। `switch_local_company_in_6_month`-এ প্রবলেমের নাম ও 🔁 সরে `- [ ] ৩০′ DSA — আজকের প্রবলেম dsa_prep_local_company-এ` হবে; `00-rules.md`-এর "DSA-র বসা" লোকাল প্রজেক্টের নিয়মে সরে এক লাইনের লিংক। *কারণ:* টিক ও ঝালাই এক জায়গায়। DSA শুরু ০৯-২১, তাই হারানোর মতো টিক নেই।
 * **৩ · প্যাটার্নের কনটেন্ট:** প্রতিটা প্রজেক্টে নিজের পথের প্যাটার্ন কপি — `patterns/<nn>-<slug>.md`, সাইটে `/pattern/<slug>/`। demo ভাঁজ করা, "চেষ্টার পরে খুলুন"। রিমোট ও গ্লোবালে ক্লু ইংরেজিতে। বাদ: simulation, Export/Import, সামগ্রিক শতাংশ; 🔥 Must-do শুধু গ্লোবালে। *কারণ:* আলাদা repo-তে ভাগ করা ফোল্ডার সম্ভব নয়; কনটেন্ট প্রায় স্থির।
 * **৪ · পথের পুনরাবৃত্তি:** উপরের পথ শুরু হয় নিচের পথের প্রবলেম দিয়ে — দিনে ২টা, ২০′ কড়া টাইমার, ইংরেজিতে ৩ লাইন, AI/demo বন্ধ, টপিক মিশিয়ে; না পারলে 🔁। তারপর নতুন প্রবলেম দিনে ১টা; সপ্তাহে একবার ৯০′-এ টানা ৩টা। গ্লোবাল একই ছাঁচে রিমোটের ~৫০ দিয়ে শুরু। *কারণ:* রিমোট শুরু হবে মাস পরে; পরীক্ষা ঘড়ি ও ভাষায়।
 * **৫ · কনটেন্টের গভীরতা:** তিনটা পথই **এখন সম্পূর্ণ** — সব দিন, সব কাজ, 🧠 chip, Heaps, hard প্রবলেমের তালিকা, mock-এর দিন।
@@ -42,12 +42,12 @@
 
 ### যেভাবে এটি তৈরি করতে হবে
 
-1. **ভিত তৈরি (লোকাল):** `switch_local_company_in_6_month`-এর `app/`, config, workflow কপি করে `local_company_dsa_prep` বানানো (create-next-app নয় — এই plan ফাইল ফোল্ডারে আছে, আর গড়ন হুবহু লাগবে)। `node_modules/next/dist/docs/` দেখে নেওয়া।
+1. **ভিত তৈরি (লোকাল):** `switch_local_company_in_6_month`-এর `app/`, config, workflow কপি করে `dsa_prep_local_company` বানানো (create-next-app নয় — এই plan ফাইল ফোল্ডারে আছে, আর গড়ন হুবহু লাগবে)। `node_modules/next/dist/docs/` দেখে নেওয়া।
 2. **parser বদল (`app/lib/plan.ts`):** দিনের heading থেকে তারিখ বাদ; `patterns/` স্ক্যান ও পার্স (নাম, ক্লু, approach, demo, complexity); কাজের লেখায় প্যাটার্ন-রেফারেন্স (`১.৪` ধরনের) থেকে লিংক।
 3. **তারিখ-লজিক:** `useProgress`-এ `start` key; `app/lib/dates.ts`-এ শুরু + দিন → তারিখ; `TodayView` শুরুর তারিখ না থাকলে প্রশ্ন দেখায়; ঝালাই আগের মতো আসল টিকের তারিখ থেকে।
 4. **নতুন পাতা:** `/pattern/[slug]/` — ক্লু আগে, demo ভাঁজ করা; rail-এ প্যাটার্নের তালিকা।
 5. **লোকালের কনটেন্ট:** `docs/00-rules.md` (DSA-র বসা, ঝালাই, যা করবেন না — `switch_local_company_in_6_month` থেকে সরানো), ব্লক ফাইল, `patterns/`-এ টপিক ১–৫-এর ২৩টা প্যাটার্ন; `principles.ts`-এ দরকারি নাম।
-6. **লোকাল build, README, `.github/workflows/deploy.yml`** → `gh repo create sojibrd/local_company_dsa_prep --public` → push → Pages চালু → লাইভ যাচাই।
+6. **লোকাল build, README, `.github/workflows/deploy.yml`** → `gh repo create sojibrd/dsa_prep_local_company --public` → push → Pages চালু → লাইভ যাচাই।
 7. **রিমোট:** লোকালের কোড কপি (key prefix `rdsa`), কনটেন্ট — ইংরেজি ক্লু, Heaps + Graph ভিত্তি + সহজ DP প্যাটার্ন, ব্লক ১ "আবার, ঘড়ি ধরে", তারপর নতুন ~২০, সাপ্তাহিক ৯০′ সেট → build → repo → deploy।
 8. **গ্লোবাল:** একই (prefix `gdsa`), সব প্যাটার্ন ইংরেজিতে + 🔥 Must-do, রিমোটের ~৫০ ঘড়ি ধরে, বাকি টপিক, hard, mock → build → repo → deploy।
 9. **`switch_local_company_in_6_month` বদল:** `01-ignition.md`, `02-stories.md`, `03-applications.md`-এ DSA কাজ → ৩০′ ঘর + লিংক; `00-rules.md`-এর DSA অংশ → লিংক; `dsa_prep` উল্লেখ (README, কম্পোনেন্টের মন্তব্য) হালনাগাদ → build → push।
