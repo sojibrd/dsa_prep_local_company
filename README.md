@@ -2,7 +2,7 @@
 
 বাংলাদেশি কোম্পানির DSA রাউন্ডের প্রস্তুতি: `dsa_prep` workbook-এর টপিক ১–৫ থেকে ৩০টা প্রবলেম, ৪০ দিনে। দিনে একটা করে, ঝালাইসহ, শেখার বিজ্ঞান মেনে। ৩০টা শেষ হলে থামা।
 
-এটা তিনটা স্বাধীন পথের একটা — [রিমোট](https://sojibrd.github.io/dsa_prep_remote_company/) আর [গ্লোবাল](https://sojibrd.github.io/dsa_prep_global_company/) আলাদা সাইট, প্রতিটা শূন্য থেকে শুরু। প্রবলেমগুলো একটার ভেতরে আরেকটা (এই ৩০টা রিমোটের প্রথম ৩০টা), কিন্তু কোনো সাইট আরেকটার পরে চালাতে হয় না। `switch_local_company_in_6_month`-এর দিন ০০৮–০৪৭-এ ৩০′ DSA-র যে ঘর আছে, এই সাইট সেই ঘরের কাজ।
+এটা তিনটা স্বাধীন পথের একটা — [রিমোট](https://sojibrd.github.io/dsa_prep_remote_company/) আর [গ্লোবাল](https://sojibrd.github.io/dsa_prep_global_company/) আলাদা সাইট, প্রতিটা শূন্য থেকে শুরু। প্রবলেমগুলো একটার ভেতরে আরেকটা (এই ৩০টা রিমোটের প্রথম ৩০টা), কিন্তু কোনো সাইট আরেকটার পরে চালাতে হয় না। `switch_in_6_month_local_company`-এর দিন ০০৮–০৪৭-এ ৩০′ DSA-র যে ঘর আছে, এই সাইট সেই ঘরের কাজ।
 
 **লাইভ:** https://sojibrd.github.io/dsa_prep_local_company/
 
@@ -24,7 +24,7 @@
 - **Static export → GitHub Pages।** Backend নেই।
 - **Progress শুধু `localStorage`-এ,** একমাত্র `app/hooks/useProgress.ts` দিয়ে।
 - **`app/lib/plan.ts` আর `app/lib/patterns.ts` server-only।**
-- **Theme contract অলঙ্ঘনীয়, সাইট dark-only।** গড়ন `switch_local_company_in_6_month`-এর মতো।
+- **Theme contract অলঙ্ঘনীয়, সাইট dark-only।** গড়ন `switch_in_6_month_local_company`-এর মতো।
 - **তিন পথের কোড একই।** পার্থক্য শুধু `app/lib/site.ts`, `next.config.ts`-এর basePath আর কনটেন্টে।
 - **স্ট্যাক:** Next.js 16, React 19, TypeScript, Tailwind v4, react-markdown।
 
@@ -43,7 +43,7 @@
 
 ### তথ্য বদলানোর ক্রম
 
-`brainstorming/ASSUMPTIONS.md` → `brainstorming/` (`dsa-prep-*.md`, `how-to-prepare-for-dsa.md`) → `switch_local_company_in_6_month/docs/` → এই ফোল্ডার।
+`brainstorming/ASSUMPTIONS.md` → `brainstorming/` (`dsa-prep-*.md`, `how-to-prepare-for-dsa.md`) → `switch_in_6_month_local_company/docs/` → এই ফোল্ডার।
 
 ### ব্লক ফাইলের ছাঁচ
 
