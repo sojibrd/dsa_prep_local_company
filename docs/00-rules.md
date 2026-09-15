@@ -13,7 +13,7 @@
 এই plan নতুন কোনো লক্ষ্য বা সংখ্যা যোগ করে না। তথ্য বদলালে এই ক্রমে:
 
 1. `brainstorming/ASSUMPTIONS.md`
-2. `brainstorming/` — `dsa-prep-how-many-paths.md`, `dsa-prep-what-works-for-local.md`, `dsa-prep-what-to-ignore-for-local.md`, `how-to-prepare-for-dsa.md`
+2. `brainstorming/` — `dsa.md` (প্রস্তুতি কীভাবে · তিন পথ · বাংলাদেশির জন্য কী ভালো · কী উপেক্ষা)
 3. `switch_in_6_month_local_company/` — ঐ plan-এর দিন ০০৮–০৪৭-এর ৩০′ DSA-র ঘর এই সাইটের দিন ০০১–০৪০
 4. এই ফোল্ডার — `docs/` (দিন) আর `patterns/` (`dsa_prep` workbook-এর টপিক ১–৫, হুবহু)
 

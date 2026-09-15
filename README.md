@@ -43,7 +43,7 @@
 
 ### তথ্য বদলানোর ক্রম
 
-`brainstorming/ASSUMPTIONS.md` → `brainstorming/` (`dsa-prep-*.md`, `how-to-prepare-for-dsa.md`) → `switch_in_6_month_local_company/docs/` → এই ফোল্ডার।
+`brainstorming/ASSUMPTIONS.md` → `brainstorming/` (`dsa.md`) → `switch_in_6_month_local_company/docs/` → এই ফোল্ডার।
 
 ### ব্লক ফাইলের ছাঁচ
 
