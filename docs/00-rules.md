@@ -17,7 +17,7 @@
 3. `switch_local_company_in_6_month/` — ঐ plan-এর দিন ০০৮–০৪৭-এর ৩০′ DSA-র ঘর এই সাইটের দিন ০০১–০৪০
 4. এই ফোল্ডার — `docs/` (দিন) আর `patterns/` (`dsa_prep` workbook-এর টপিক ১–৫, হুবহু)
 
-রিমোট আর গ্লোবালের পথ আলাদা সাইটে: `dsa_prep_remote_company`, `dsa_prep_global_company`। এখন ওদিকে তাকাবেন না।
+রিমোট আর গ্লোবালের পথ আলাদা, স্বাধীন সাইটে: `dsa_prep_remote_company`, `dsa_prep_global_company` — প্রতিটা শূন্য থেকে শুরু হয়, এই সাইট শেষ করা ওদের শর্ত নয়। এখন ওদিকে তাকাবেন না।
 
 ## কীভাবে পড়বেন
 
