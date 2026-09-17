@@ -2,6 +2,7 @@
 
 import { useCallback, useSyncExternalStore } from "react";
 import { useLocalStorage } from "./useLocalStorage";
+import { useProgressSync, type SyncStatus } from "./useSync";
 import { REVIEW_DAYS, isISODate, type ReviewState } from "../lib/dates";
 import { SITE } from "../lib/site";
 
@@ -16,6 +17,7 @@ import { SITE } from "../lib/site";
  *   <prefix>:v1:check   → { ["d007" | "b1"]: "yes" | "no" }   দিন-শেষ / ব্লক-শেষ
  *   <prefix>:v1:review  → { [taskId]: ReviewState }
  *   <prefix>:v1:note    → { ["lc1"]: { solution, stuck } }   প্রবলেমের দুই ঘরের নোট
+ *   <prefix>:v1:meta    → { updatedAt: ISOString }   সর্বশেষ sync-এর timestamp
  *
  * ঝালাইয়ের অবস্থা শুধু "মনে ছিল" / "আটকে গেছি" চাপলে লেখা হয়। তার আগে পর্যন্ত
  * অবস্থা = { base: কাজ শেষের তারিখ, step: 0 } — তাই টিক দিলেই ঝালাই চালু।
@@ -25,6 +27,7 @@ const TASK_KEY = `${SITE.storagePrefix}:v1:task`;
 const CHECK_KEY = `${SITE.storagePrefix}:v1:check`;
 const REVIEW_KEY = `${SITE.storagePrefix}:v1:review`;
 const NOTE_KEY = `${SITE.storagePrefix}:v1:note`;
+const META_KEY = `${SITE.storagePrefix}:v1:meta`;
 
 export type Answer = "yes" | "no";
 export type ProblemNote = { solution: string; stuck: string };
@@ -33,6 +36,7 @@ type DoneMap = Record<string, string>;
 type Answers = Record<string, Answer>;
 type Reviews = Record<string, ReviewState>;
 type Notes = Record<string, ProblemNote>;
+type Meta = { updatedAt: string };
 
 const neverChanges = () => () => {};
 
@@ -51,6 +55,14 @@ export function useProgress() {
   const [answers, setAnswers] = useLocalStorage<Answers>(CHECK_KEY, {});
   const [reviews, setReviews] = useLocalStorage<Reviews>(REVIEW_KEY, {});
   const [notes, setNotes] = useLocalStorage<Notes>(NOTE_KEY, {});
+  const [meta, setMeta] = useLocalStorage<Meta>(META_KEY, { updatedAt: "" });
+
+  const sync = useProgressSync(
+    { start: startRaw, tasks, answers, reviews, notes },
+    { start: setStartRaw, tasks: setTasks, answers: setAnswers, reviews: setReviews, notes: setNotes },
+    meta,
+    setMeta,
+  );
 
   /** বসানো না থাকলে বা নষ্ট হলে `null` */
   const start = isISODate(startRaw) ? startRaw : null;
@@ -158,5 +170,8 @@ export function useProgress() {
     stuck,
     noteFor,
     setNote,
+    sync,
   };
 }
+
+export type { SyncStatus };
