@@ -89,8 +89,11 @@ export function useProgressSync<T extends Record<string, unknown>>(
       supabase
         .from("progress_sync")
         .upsert({ sync_key: key, site_prefix: SITE.storagePrefix, data: blob, updated_at: updatedAt })
-        .then(({ error }) => setStatus(error ? "error" : "synced"));
-      setMeta({ updatedAt });
+        .then(({ error }) => {
+          /* meta শুধু সফল push-এই এগোয় — ব্যর্থ push-কে "synced" ধরে নিলে ভবিষ্যতে আসল remote update pull না-ও হতে পারে */
+          if (!error) setMeta({ updatedAt });
+          setStatus(error ? "error" : "synced");
+        });
     }, PUSH_DEBOUNCE_MS);
 
     return () => {
